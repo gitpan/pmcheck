@@ -1,5 +1,8 @@
 Revision history for pmcheck
 
+1.1.3  Fri Dec 30 15:37:27 EST 2011
+       Add LICENSE and MIN_PERL_VERSION to Makefile.PL
+
 1.1.2  Fri Dec 30 14:26:43 EST 2011
        Also add missing dependency to Build.PL
 

@@ -3,13 +3,15 @@ use warnings;
 use ExtUtils::MakeMaker;
 
 WriteMakefile(
-    NAME          => 'pmcheck',
-    AUTHOR        => 'Andrew Pam <andrew.pam@strategicdata.com.au>',
-    VERSION_FROM  => 'script/pmcheck',
-    ABSTRACT_FROM => 'script/pmcheck',
-    EXE_FILES     => ['script/pmcheck'],
-    PM            => {},
+    ABSTRACT_FROM    => 'script/pmcheck',
+    AUTHOR           => 'Andrew Pam <andrew.pam@strategicdata.com.au>',
+    EXE_FILES        => ['script/pmcheck'],
+    LICENSE          => 'perl',
+    MIN_PERL_VERSION => '5.10.0',
+    NAME             => 'pmcheck',
+    PM               => {},
     PREREQ_PM => { 'PPI::Document' => 0, 'Test::More' => 0, 'version' => 0, },
-    dist  => { COMPRESS => 'gzip -9f', SUFFIX => 'gz', },
-    clean => { FILES    => 'pmcheck-*' },
+    VERSION_FROM => 'script/pmcheck',
+    clean        => { FILES => 'pmcheck-*' },
+    dist         => { COMPRESS => 'gzip -9f', SUFFIX => 'gz', },
 );

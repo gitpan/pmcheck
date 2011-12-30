@@ -9,7 +9,7 @@ WriteMakefile(
     ABSTRACT_FROM => 'script/pmcheck',
     EXE_FILES     => ['script/pmcheck'],
     PM            => {},
-    PREREQ_PM     => { 'Test::More' => 0, 'version' => 0, },
-    dist          => { COMPRESS => 'gzip -9f', SUFFIX => 'gz', },
-    clean => { FILES => 'pmcheck-*' },
+    PREREQ_PM => { 'PPI::Document' => 0, 'Test::More' => 0, 'version' => 0, },
+    dist  => { COMPRESS => 'gzip -9f', SUFFIX => 'gz', },
+    clean => { FILES    => 'pmcheck-*' },
 );

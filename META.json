@@ -32,11 +32,12 @@
       },
       "runtime" : {
          "requires" : {
+            "PPI::Document" : 0,
             "Test::More" : 0,
             "version" : 0
          }
       }
    },
    "release_status" : "stable",
-   "version" : "v1.1.0"
+   "version" : "v1.1.1"
 }

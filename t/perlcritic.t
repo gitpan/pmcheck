@@ -12,7 +12,7 @@ use Test::More;
 # Tests
 
 plan skip_all => 'Test::Perl::Critic required for testing PBP compliance'
-    if !require Test::Perl::Critic;
+    if !eval 'use Test::Perl::Critic; 1';    ## no critic (ProhibitStringyEval)
 
 plan skip_all =>
     'Perl::Critic v1.117 or later required for testing PBP compliance'

@@ -1,4 +1,7 @@
 Revision history for pmcheck
 
-1.1.0  Wed Dec 28 12:47:48 2011
-       Initial release under the App:: namespace.
+1.1.1  Fri Dec 30 11:51:49 EST 2011
+       Add missing dependency to Makefile.PL
+
+1.1.0  Wed Dec 28 12:47:48 EST 2011
+       Initial release under the App:: namespace

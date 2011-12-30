@@ -1,5 +1,8 @@
 Revision history for pmcheck
 
+1.1.2  Fri Dec 30 14:26:43 EST 2011
+       Also add missing dependency to Build.PL
+
 1.1.1  Fri Dec 30 11:51:49 EST 2011
        Add missing dependency to Makefile.PL
 

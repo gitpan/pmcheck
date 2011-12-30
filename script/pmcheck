@@ -61,7 +61,7 @@ use Module::CoreList;
 use Pod::Usage qw( pod2usage );
 use PPI::Document;
 
-use version; our $VERSION = version->new('v1.1.1');
+use version; our $VERSION = version->new('v1.1.2');
 
 ########################################
 # Constants

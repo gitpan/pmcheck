@@ -14,6 +14,6 @@ use strict;
 use utf8;
 use warnings;
 
-use version; our $VERSION = version->new('v1.1.1');
+use version; our $VERSION = version->new('v1.1.2');
 
 1;

@@ -5,6 +5,7 @@ use utf8;
 use version;
 use warnings;
 
+use File::Spec::Functions;
 use FindBin qw( $Bin );
 use Test::More;
 
@@ -18,6 +19,10 @@ plan skip_all =>
     'Perl::Critic v1.117 or later required for testing PBP compliance'
     if $Perl::Critic::VERSION < version->parse('v1.117');
 
-Test::Perl::Critic::all_critic_ok("$Bin/../script");
+Test::Perl::Critic->import(
+    -profile              => catfile( $Bin, 'perlcriticrc' ),
+    '-profile-strictness' => 'quiet',
+);
+Test::Perl::Critic::all_critic_ok( catdir( $Bin, &updir, 'script' ) );
 
 exit;

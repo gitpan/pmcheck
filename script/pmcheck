@@ -61,7 +61,7 @@ use Module::CoreList;
 use Pod::Usage qw( pod2usage );
 use PPI::Document;
 
-use version; our $VERSION = version->new('v1.1.4');
+use version; our $VERSION = version->new('v1.1.5');
 
 ########################################
 # Constants
@@ -121,7 +121,7 @@ sub required {
     }
 
     my @packages = eval { modules_used( PPI::Document->new($_) ) } or return;
-    $required{$_}++ foreach grep { !exists $$CORELIST{$_} } @packages;
+    $required{$_}++ foreach grep { !exists $CORELIST->{$_} } @packages;
 
     return;
 } ## end sub required

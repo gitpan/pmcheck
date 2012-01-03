@@ -7,6 +7,7 @@ lib/App/pmcheck.pm
 script/pmcheck
 t/00.load.t
 t/perlcritic.t
+t/perlcriticrc
 t/pod-coverage.t
 t/pod.t
 META.yml                                 Module YAML meta-data (added by MakeMaker)

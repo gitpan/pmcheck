@@ -1,6 +1,10 @@
 Revision history for pmcheck
 
-1.1.4  Fri Dec 30 17:40:08 EST 2011
+1.1.5  Tue Jan  3 14:48:30 EST 2012
+       Add perlcriticrc
+       Use File::Spec::Functions in tests
+
+1.1.4  Tue Jan  3 12:22:08 EST 2012
        Minor perlcritic cleanup
        Change load test to require_ok
 

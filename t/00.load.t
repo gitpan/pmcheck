@@ -10,6 +10,6 @@ use Test::More tests => 1;
 ########################################
 # Tests
 
-ok( !system("perl -cw $Bin/../script/pmcheck"), 'pmcheck compiles' );
+require_ok("$Bin/../script/pmcheck");
 
 exit;

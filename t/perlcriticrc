@@ -25,9 +25,6 @@ severity = 1
 # Git doesn't have these. And they're rarely practical anyway.
 [-Miscellanea::RequireRcsKeywords]
 
-# Don't attempt to comply with OTRS policies
-[-OTRS]
-
 # @$foo easier to read and type than @{$foo}
 [-References::ProhibitDoubleSigils]
 

@@ -4,7 +4,7 @@
       "Andrew Pam <andrew.pam@strategicdata.com.au>"
    ],
    "dynamic_config" : 1,
-   "generated_by" : "ExtUtils::MakeMaker version 6.59, CPAN::Meta::Converter version 2.112150",
+   "generated_by" : "ExtUtils::MakeMaker version 6.62, CPAN::Meta::Converter version 2.112150",
    "license" : [
       "perl_5"
    ],
@@ -33,12 +33,12 @@
       "runtime" : {
          "requires" : {
             "PPI::Document" : 0,
-            "Test::More" : 0,
+            "Test::Differences" : 0,
             "perl" : "5.010000",
             "version" : 0
          }
       }
    },
    "release_status" : "stable",
-   "version" : "v1.1.6"
+   "version" : "v1.1.7"
 }

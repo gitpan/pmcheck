@@ -61,7 +61,7 @@ use Module::CoreList;
 use Pod::Usage qw( pod2usage );
 use PPI::Document;
 
-use version; our $VERSION = version->new('v1.1.6');
+use version; our $VERSION = version->new('v1.1.7');
 
 ########################################
 # Constants
@@ -72,7 +72,7 @@ my $MODULE_USED = eval { require Module::Used };
 ########################################
 # Global variables
 
-my ( %opt, %provided, %required );
+our ( %opt, %provided, %required );    ## no critic (Variables::ProhibitPackageVars)
 
 ########################################
 # Subroutines
@@ -98,8 +98,8 @@ sub modules_used {
 
 sub provided {
     return if $File::Find::name =~ m{ / \. [^.] }x;    # Ignore hidden
-    return if !m/ \.pm \z /x;                # Only check .pm files
-    return if !( -f -r ) || -z _ || -B _;    ## no critic (ProhibitFiletest_f)
+    return if !m/ \.pm \z /x;                          # Only check .pm files
+    return if !( -f -r ) || -z _ || -B _;              ## no critic (ProhibitFiletest_f)
 
     my $doc = PPI::Document->new($_);
     my $packages = eval { $doc->find('PPI::Statement::Package') } or return;
@@ -115,7 +115,7 @@ sub required {
         return if !m/ \. (?: cgi | p[lm] | t ) \z /x;    # Check file extension
     }
     else {
-        return if !( -f -r ) || -z _ || -B _;  ## no critic (ProhibitFiletest_f)
+        return if !( -f -r ) || -z _ || -B _;            ## no critic (ProhibitFiletest_f)
         ## Ignore files with no dot that don't start with a perl shebang line
         return if !eval { first_line($_) =~ m{ \A \#! .* /perl }x };
     }

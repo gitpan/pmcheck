@@ -1,5 +1,8 @@
 Revision history for pmcheck
 
+1.1.7  Wed Jan  4 19:03:56 EST 2012
+       Add tests
+
 1.1.6  Wed Jan  4 09:55:46 EST 2012
        Change shebang line to #!/usr/bin/perl
        Use $ENV{TEST_AUTHOR} to enable perlcritic.t

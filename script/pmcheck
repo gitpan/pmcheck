@@ -61,7 +61,7 @@ use Module::CoreList;
 use Pod::Usage qw( pod2usage );
 use PPI::Document;
 
-use version; our $VERSION = version->new('v1.1.7');
+use version; our $VERSION = version->new('v1.1.8');
 
 ########################################
 # Constants
@@ -86,13 +86,13 @@ sub first_line {
 } ## end sub first_line
 
 sub modules_used {
-    my $doc = shift;
+    my $doc = PPI::Document->new( shift, readonly => 1 );
 
     ## no critic (Modules::RequireExplicitInclusion)
     return Module::Used::modules_used_in_document($doc) if $MODULE_USED;
 
     # Doesn't handle 'base' and 'parent' pragmas or Moose 'extends' and 'with'
-    my $includes = $doc->find('PPI::Statement::Include');
+    my $includes = $doc->find('PPI::Statement::Include') or return;
     return map { $_->module } grep { $_->module } @$includes;
 } ## end sub modules_used
 
@@ -101,7 +101,7 @@ sub provided {
     return if !m/ \.pm \z /x;                          # Only check .pm files
     return if !( -f -r ) || -z _ || -B _;              ## no critic (ProhibitFiletest_f)
 
-    my $doc = PPI::Document->new($_);
+    my $doc = PPI::Document->new( $_, readonly => 1 );
     my $packages = eval { $doc->find('PPI::Statement::Package') } or return;
     $provided{ $_->schild(1)->content }++ foreach @$packages;
 
@@ -120,7 +120,7 @@ sub required {
         return if !eval { first_line($_) =~ m{ \A \#! .* /perl }x };
     }
 
-    my @packages = eval { modules_used( PPI::Document->new($_) ) } or return;
+    my @packages = eval { modules_used($_) } or return;
     $required{$_}++ foreach grep { !exists $CORELIST->{$_} } @packages;
 
     return;

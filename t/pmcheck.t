@@ -23,7 +23,7 @@ my $MODULE = catfile( $Bin, &updir, 'lib', 'App', 'pmcheck.pm' );
 ########################################
 # Global variables
 
-our ( %provided, %required );
+our ( %provided, %required );   ## no critic (Variables::ProhibitPackageVars)
 
 ######################################################################
 ## Tests
@@ -38,10 +38,9 @@ is( first_line( catfile( $Bin, 'perlcriticrc' ) ), "severity = 3\n", 'first_line
 ##############################
 # sub modules_used
 
-eq_or_diff [ modules_used( PPI::Document->new() ) ], [], 'modules_used none';
+eq_or_diff [ modules_used(\q{}) ], [], 'modules_used none';
 
-eq_or_diff [ sort( modules_used( PPI::Document->new($MODULE) ) ) ],
-    [qw( strict utf8 version warnings )], 'modules_used';
+eq_or_diff [ sort( modules_used($MODULE) ) ], [qw( strict utf8 version warnings )], 'modules_used';
 
 ##############################
 # sub provided

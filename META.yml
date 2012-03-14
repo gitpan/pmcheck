@@ -22,4 +22,4 @@ requires:
   Test::Differences: 0
   perl: 5.010000
   version: 0
-version: v1.1.8
+version: v1.1.9

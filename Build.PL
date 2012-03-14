@@ -9,6 +9,7 @@ my $builder = Module::Build->new(
     dist_author       => 'Andrew Pam <andrew.pam@strategicdata.com.au>',
     dist_version_from => 'script/pmcheck',
     requires          => { 'PPI::Document' => 0, 'Test::Differences' => 0, 'version' => 0, },
+    script_files      => 'script',
     add_to_cleanup    => ['pmcheck-*'],
 );
 

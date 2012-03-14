@@ -1,14 +1,14 @@
 Build.PL
 Changes
-MANIFEST
-Makefile.PL
-README
 lib/App/pmcheck.pm
+Makefile.PL
+MANIFEST
+META.json			Module JSON meta-data (added by MakeMaker)
+META.yml			Module YAML meta-data (added by MakeMaker)
+README
 script/pmcheck
 t/perlcritic.t
 t/perlcriticrc
 t/pmcheck.t
 t/pod-coverage.t
 t/pod.t
-META.yml                                 Module YAML meta-data (added by MakeMaker)
-META.json                                Module JSON meta-data (added by MakeMaker)

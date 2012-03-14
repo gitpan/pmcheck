@@ -1,5 +1,8 @@
 Revision history for pmcheck
 
+1.1.9  Wed Mar 14 14:44:45 EST 2012
+       Add missing script_files option to Build.PL
+
 1.1.8  Thu Jan  5 15:30:56 EST 2012
        Enable PPI readonly optimisation
        Change sub modules_used to return cleanly on find failure

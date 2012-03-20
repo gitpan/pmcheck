@@ -1,4 +1,4 @@
-pmcheck version 1.1.0
+pmcheck version 1.1
 
 Recursively extract package information from all readable non-empty regular
 text files in the source tree.  The current directory is used if no directory
@@ -12,7 +12,8 @@ name are also checked if they start with a perl shebang line.
 
 NOTE: Packages required by the 'use base' and 'use parent' pragmas and by the
 Moose 'extends' and 'with' functions will only be included if Module::Used is
-available. 
+available.  Will display an activity indicator if run interactively and
+Term::Activity is available.
 
 INSTALLATION
 
@@ -33,12 +34,12 @@ Alternatively, to install with Module::Build, you can use the following commands
 
 DEPENDENCIES
 
-None.
+PPI::Document
 
 
 COPYRIGHT AND LICENCE
 
-Copyright (C) 2011, Andrew Pam
+Copyright 2011-2012, Andrew Pam
 
 This library is free software; you can redistribute it and/or modify
 it under the same terms as Perl itself.

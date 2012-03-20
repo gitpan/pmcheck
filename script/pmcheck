@@ -24,7 +24,8 @@ name are also checked if they start with a perl shebang line.
 
 NOTE: Packages required by the 'use base' and 'use parent' pragmas and by the
 Moose 'extends' and 'with' functions will only be included if Module::Used is
-available. 
+available.  Will display an activity indicator if run interactively and
+Term::Activity is available.
 
 =head1 OPTIONS
 
@@ -42,7 +43,7 @@ pmcheck -p
 =head1 COPYRIGHT AND LICENSE
 
 Created by Andrew Pam <andrew.pam@strategicdata.com.au>
-Copyright 2011 Strategic Data
+Copyright 2011-2012 Strategic Data
 
 This program is free software; you may redistribute it and/or modify it under
 the same terms as Perl itself.
@@ -61,18 +62,22 @@ use Module::CoreList;
 use Pod::Usage qw( pod2usage );
 use PPI::Document;
 
-use version; our $VERSION = version->new('v1.1.9');
+use version; our $VERSION = version->new('v1.1.10');
 
 ########################################
 # Constants
 
 my $CORELIST = $Module::CoreList::version{$]};
 my $MODULE_USED = eval { require Module::Used };
+my $SHOW_ACTIVITY
+    = -t *STDERR && eval { require Term::Activity };    ## no critic (ProhibitInteractiveTest)
 
 ########################################
 # Global variables
 
-our ( %opt, %provided, %required );    ## no critic (Variables::ProhibitPackageVars)
+my $activity;
+
+our ( %opt, %provided, %required );                     ## no critic (ProhibitPackageVars)
 
 ########################################
 # Subroutines
@@ -101,6 +106,7 @@ sub provided {
     return if !m/ \.pm \z /x;                          # Only check .pm files
     return if !( -f -r ) || -z _ || -B _;              ## no critic (ProhibitFiletest_f)
 
+    $activity->tick if $SHOW_ACTIVITY;
     my $doc = PPI::Document->new( $_, readonly => 1 );
     my $packages = eval { $doc->find('PPI::Statement::Package') } or return;
     $provided{ $_->schild(1)->content }++ foreach @$packages;
@@ -120,6 +126,7 @@ sub required {
         return if !eval { first_line($_) =~ m{ \A \#! .* /perl }x };
     }
 
+    $activity->tick if $SHOW_ACTIVITY;
     my @packages = eval { modules_used($_) } or return;
     $required{$_}++ foreach grep { !exists $CORELIST->{$_} } @packages;
 
@@ -133,15 +140,18 @@ return 1 if caller;    # For testing
 
 GetOptions( \%opt, qw( missing provided ) ) or pod2usage(1);
 
+$activity = Term::Activity->new('Finding provided') if $SHOW_ACTIVITY;
 my $root = $ARGV[0] // '.';
 find( \&provided, $root );
-if ( $opt{'provided'} ) { say foreach sort keys %provided; exit }
+if ( $opt{'provided'} ) { undef $activity; say foreach sort keys %provided; exit }
 
+$activity->relabel('Finding required') if $SHOW_ACTIVITY;
 find( \&required, $root );
+$activity->relabel('Done.') if $SHOW_ACTIVITY;
+undef $activity;
 my @packages = sort grep { !exists $provided{$_} } keys %required;
 if ( !$opt{'missing'} ) { say foreach @packages; exit }
 
-say foreach grep { !eval "require $_" }    ## no critic (ProhibitStringyEval)
-    @packages;
+say foreach grep { !eval "require $_" } @packages;    ## no critic (ProhibitStringyEval)
 
 exit;

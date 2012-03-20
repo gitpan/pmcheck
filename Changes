@@ -1,5 +1,8 @@
 Revision history for pmcheck
 
+1.1.11 Wed Mar 21 02:14:01 EST 2012
+       Update dependencies
+
 1.1.10 Tue Mar 20 18:50:18 EST 2012
        Add Term::Activity support if available
 
